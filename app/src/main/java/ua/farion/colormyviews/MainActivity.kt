@@ -24,7 +24,10 @@ class MainActivity : ComponentActivity() {
             binding.boxThreeText,
             binding.boxFourText,
             binding.boxFiveText,
-            binding.constraintLayout
+            binding.constraintLayout,
+            binding.redButton,
+            binding.greenButton,
+            binding.yellowButton
         )
 
         for (item in clickableViews) {
@@ -39,6 +42,9 @@ class MainActivity : ComponentActivity() {
                 binding.boxThreeText -> view.setBackgroundResource(android.R.color.holo_green_light)
                 binding.boxFourText -> view.setBackgroundResource(android.R.color.holo_green_dark)
                 binding.boxFiveText -> view.setBackgroundResource(android.R.color.holo_purple)
+                binding.redButton -> binding.boxThreeText.setBackgroundResource(R.color.my_red)
+                binding.yellowButton -> binding.boxFourText.setBackgroundResource(R.color.my_yellow)
+                binding.greenButton -> binding.boxFiveText.setBackgroundResource(R.color.my_green)
                 else -> view.setBackgroundColor(Color.LTGRAY)
         }
     }
