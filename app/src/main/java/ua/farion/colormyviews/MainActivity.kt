@@ -1,21 +1,45 @@
 package ua.farion.colormyviews
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ua.farion.colormyviews.ui.theme.ColorMyViewsTheme
+import androidx.databinding.DataBindingUtil
+import ua.farion.colormyviews.databinding.ActivityMainBinding
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setListeners()
+    }
+
+    private fun setListeners() {
+        val clickableViews: List<View> = listOf(
+            binding.boxOneText,
+            binding.boxTwoText,
+            binding.boxThreeText,
+            binding.boxFourText,
+            binding.boxFiveText,
+            binding.constraintLayout
+        )
+
+        for (item in clickableViews) {
+            item.setOnClickListener { makeColored(it) }
+        }
+    }
+
+    private fun makeColored(view: View) {
+        when (view) {
+                binding.boxOneText -> view.setBackgroundColor(Color.DKGRAY)
+                binding.boxTwoText -> view.setBackgroundColor(Color.GRAY)
+                binding.boxThreeText -> view.setBackgroundResource(android.R.color.holo_green_light)
+                binding.boxFourText -> view.setBackgroundResource(android.R.color.holo_green_dark)
+                binding.boxFiveText -> view.setBackgroundResource(android.R.color.holo_purple)
+                else -> view.setBackgroundColor(Color.LTGRAY)
+        }
     }
 }
